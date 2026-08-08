@@ -22,7 +22,18 @@
       <p>{{ section.settings.text }}</p>
     {%- endif -%}
     {%- if section.settings.button_label != blank -%}
-      <a class="btn btn-primary" href="{{ section.settings.button_link }}">{{ section.settings.button_label }}</a>
+      {%- liquid
+        if section.settings.button_link != blank
+          assign editorial_href = section.settings.button_link
+        elsif pages.sobre.handle != blank
+          assign editorial_href = pages.sobre.url
+        elsif pages['about'].handle != blank
+          assign editorial_href = pages['about'].url
+        else
+          assign editorial_href = routes.root_url
+        endif
+      -%}
+      <a class="btn btn-primary" href="{{ editorial_href }}">{{ section.settings.button_label }}</a>
     {%- endif -%}
   </div>
 </section>
@@ -42,7 +53,12 @@
       "default": "A Florenza Urban nasceu da ideia de que o glamour não precisa ser distante — ele cabe no cotidiano. Cada peça é escolhida com olhar editorial e alma de boutique."
     },
     { "type": "text", "id": "button_label", "label": "Botão", "default": "Nossa história" },
-    { "type": "url", "id": "button_link", "label": "Link", "default": "/pages/sobre" }
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link",
+      "info": "Se vazio, tenta a página Sobre; se não existir, volta à home."
+    }
   ],
   "presets": [{ "name": "Editorial" }]
 }
