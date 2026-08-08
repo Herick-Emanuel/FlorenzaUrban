@@ -1,7 +1,29 @@
 <footer class="site-footer">
   <div class="footer-grid">
     <div>
-      <p class="footer-brand">{{ section.settings.brand_text }}</p>
+      <a class="footer-brand" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
+        {%- if settings.logo != blank -%}
+          {{
+            settings.logo
+            | image_url: width: 400
+            | image_tag:
+              class: 'footer-brand__logo',
+              widths: '200, 400',
+              sizes: '180px',
+              alt: shop.name,
+              loading: 'lazy'
+          }}
+        {%- else -%}
+          <img
+            class="footer-brand__logo"
+            src="{{ 'FUBG.png' | asset_url }}"
+            alt="{{ shop.name }}"
+            width="180"
+            height="72"
+            loading="lazy"
+          >
+        {%- endif -%}
+      </a>
       <p class="footer-desc">{{ section.settings.description }}</p>
       <div class="footer-social">
         {%- if section.settings.instagram != blank -%}

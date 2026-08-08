@@ -9,6 +9,8 @@
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- else -%}
+      <link rel="icon" href="{{ 'FU.ico' | asset_url }}" type="image/x-icon">
     {%- endif -%}
 
     <title>

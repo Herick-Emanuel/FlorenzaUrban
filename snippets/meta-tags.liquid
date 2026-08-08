@@ -14,6 +14,8 @@
     assign og_image = page_image | image_url: width: 1200
   elsif settings.share_image != blank
     assign og_image = settings.share_image | image_url: width: 1200
+  else
+    assign og_image = 'FUBG.png' | asset_url
   endif
 -%}
 
