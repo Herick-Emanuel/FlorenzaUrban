@@ -1,0 +1,84 @@
+{
+  "general": {
+    "meta": {
+      "tagged": "Com a tag \"{{ tags }}\"",
+      "page": "Página {{ page }}"
+    },
+    "navigation": {
+      "collection": "Coleção",
+      "about": "Sobre",
+      "contact": "Contato"
+    },
+    "breadcrumbs": {
+      "home": "Home",
+      "collection": "Coleção"
+    },
+    "cart": {
+      "title": "Sacola"
+    },
+    "continue_shopping": "Continuar comprando",
+    "footer": {
+      "rights": "Todos os direitos reservados."
+    },
+    "404": {
+      "title": "Página não encontrada",
+      "subtext": "Esta página pode ter saído da coleção.",
+      "link": "Voltar à home"
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "Ir para o conteúdo",
+    "main_navigation": "Navegação principal",
+    "menu": "Menu",
+    "breadcrumb": "Breadcrumb"
+  },
+  "newsletter": {
+    "label": "E-mail",
+    "success": "Inscrição confirmada. Bem-vinda à boutique."
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Adicionar à sacola",
+      "sold_out": "Esgotado",
+      "on_sale": "Sale",
+      "new": "Novo",
+      "back_to_collection": "Voltar à coleção",
+      "contact_boutique": "Falar com a boutique",
+      "variant": "Opções",
+      "media": "Ver imagem {{ index }}"
+    }
+  },
+  "sections": {
+    "collection": {
+      "eyebrow": "Boutique",
+      "filter": "Filtrar coleção",
+      "all": "Todos",
+      "empty": "Nenhuma peça nesta seleção."
+    }
+  },
+  "cart": {
+    "general": {
+      "eyebrow": "Boutique",
+      "title": "Sua sacola",
+      "empty": "Sua sacola está vazia.",
+      "quantity": "Quantidade",
+      "remove": "Remover",
+      "subtotal": "Subtotal",
+      "update": "Atualizar",
+      "checkout": "Finalizar compra"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Nome",
+      "email": "E-mail",
+      "message": "Mensagem",
+      "send": "Enviar mensagem",
+      "address": "Endereço",
+      "post_success": "Mensagem enviada. Retornamos em breve."
+    }
+  },
+  "onboarding": {
+    "product_title": "Peça exemplo"
+  }
+}

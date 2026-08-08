@@ -1,0 +1,80 @@
+<header class="page-hero">
+  <nav aria-label="{{ 'accessibility.breadcrumb' | t }}" class="breadcrumb">
+    <ol>
+      <li><a href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t }}</a></li>
+      <li aria-current="page">{{ page.title }}</li>
+    </ol>
+  </nav>
+  <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+  <h1>{{ section.settings.heading | default: page.title }}</h1>
+  {%- if section.settings.intro != blank -%}
+    <p>{{ section.settings.intro }}</p>
+  {%- endif -%}
+</header>
+
+<section class="section">
+  <div class="about-grid">
+    <div class="about-copy">
+      <p class="eyebrow">{{ section.settings.story_eyebrow }}</p>
+      <h2 class="section-title" style="margin-bottom:24px">
+        {{ section.settings.story_heading }}
+        {%- if section.settings.story_heading_em != blank -%}<br><em>{{ section.settings.story_heading_em }}</em>{%- endif -%}
+      </h2>
+      {%- if page.content != blank -%}
+        {{ page.content }}
+      {%- else -%}
+        <p>{{ section.settings.story_text }}</p>
+      {%- endif -%}
+      <a class="btn btn-primary" href="{{ section.settings.button_link }}" style="margin-top:12px">{{ section.settings.button_label }}</a>
+    </div>
+    <div class="about-media">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', alt: section.settings.heading }}
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag }}
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="about-values">
+    {%- for block in section.blocks -%}
+      <div class="value" {{ block.shopify_attributes }}>
+        <h3>{{ block.settings.title }}</h3>
+        <p>{{ block.settings.text }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sobre",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "A boutique" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Florenza Urban" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Uma casa de moda para quem habita a cidade com intenção e presença." },
+    { "type": "image_picker", "id": "image", "label": "Imagem" },
+    { "type": "text", "id": "story_eyebrow", "label": "História eyebrow", "default": "Nossa história" },
+    { "type": "text", "id": "story_heading", "label": "História título", "default": "Glamour que cabe no" },
+    { "type": "text", "id": "story_heading_em", "label": "História itálico", "default": "cotidiano" },
+    {
+      "type": "textarea",
+      "id": "story_text",
+      "label": "Texto (se a página estiver vazia)",
+      "default": "A Florenza Urban nasceu do desejo de criar uma boutique onde o editorial encontra a rua — sem perder o brilho."
+    },
+    { "type": "text", "id": "button_label", "label": "Botão", "default": "Explorar a coleção" },
+    { "type": "url", "id": "button_link", "label": "Link", "default": "/collections/all" }
+  ],
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Valor",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Título", "default": "Curadoria" },
+        { "type": "textarea", "id": "text", "label": "Texto", "default": "Cada peça passa por um olhar editorial." }
+      ]
+    }
+  ]
+}
+{% endschema %}

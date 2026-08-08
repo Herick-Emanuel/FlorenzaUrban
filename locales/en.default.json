@@ -1,0 +1,84 @@
+{
+  "general": {
+    "meta": {
+      "tagged": "Tagged \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    },
+    "navigation": {
+      "collection": "Collection",
+      "about": "About",
+      "contact": "Contact"
+    },
+    "breadcrumbs": {
+      "home": "Home",
+      "collection": "Collection"
+    },
+    "cart": {
+      "title": "Bag"
+    },
+    "continue_shopping": "Continue shopping",
+    "footer": {
+      "rights": "All rights reserved."
+    },
+    "404": {
+      "title": "Page not found",
+      "subtext": "This page may have left the collection.",
+      "link": "Back home"
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content",
+    "main_navigation": "Main navigation",
+    "menu": "Menu",
+    "breadcrumb": "Breadcrumb"
+  },
+  "newsletter": {
+    "label": "Email",
+    "success": "Welcome to the boutique list."
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to bag",
+      "sold_out": "Sold out",
+      "on_sale": "Sale",
+      "new": "New",
+      "back_to_collection": "Back to collection",
+      "contact_boutique": "Talk to the boutique",
+      "variant": "Options",
+      "media": "View image {{ index }}"
+    }
+  },
+  "sections": {
+    "collection": {
+      "eyebrow": "Boutique",
+      "filter": "Filter collection",
+      "all": "All",
+      "empty": "No pieces in this selection."
+    }
+  },
+  "cart": {
+    "general": {
+      "eyebrow": "Boutique",
+      "title": "Your bag",
+      "empty": "Your bag is empty.",
+      "quantity": "Quantity",
+      "remove": "Remove",
+      "subtotal": "Subtotal",
+      "update": "Update",
+      "checkout": "Checkout"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "send": "Send message",
+      "address": "Address",
+      "post_success": "Message sent. We'll be in touch soon."
+    }
+  },
+  "onboarding": {
+    "product_title": "Example product"
+  }
+}

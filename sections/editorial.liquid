@@ -1,0 +1,49 @@
+<section class="editorial" aria-labelledby="Editorial-{{ section.id }}">
+  <div class="editorial-media">
+    {%- if section.settings.image != blank -%}
+      {{
+        section.settings.image
+        | image_url: width: 1400
+        | image_tag: loading: 'lazy', widths: '700, 1000, 1400', sizes: '(min-width: 990px) 50vw, 100vw', alt: section.settings.heading
+      }}
+    {%- else -%}
+      {{ 'lifestyle-2' | placeholder_svg_tag }}
+    {%- endif -%}
+  </div>
+  <div class="editorial-body">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    <h2 class="section-title" id="Editorial-{{ section.id }}">
+      {{ section.settings.heading }}
+      {%- if section.settings.heading_em != blank -%}<br><em>{{ section.settings.heading_em }}</em>{%- endif -%}
+    </h2>
+    {%- if section.settings.text != blank -%}
+      <p>{{ section.settings.text }}</p>
+    {%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <a class="btn btn-primary" href="{{ section.settings.button_link }}">{{ section.settings.button_label }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Editorial",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Imagem" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "A boutique" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Onde o estilo encontra a" },
+    { "type": "text", "id": "heading_em", "label": "Título itálico", "default": "cidade" },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Texto",
+      "default": "A Florenza Urban nasceu da ideia de que o glamour não precisa ser distante — ele cabe no cotidiano. Cada peça é escolhida com olhar editorial e alma de boutique."
+    },
+    { "type": "text", "id": "button_label", "label": "Botão", "default": "Nossa história" },
+    { "type": "url", "id": "button_link", "label": "Link", "default": "/pages/sobre" }
+  ],
+  "presets": [{ "name": "Editorial" }]
+}
+{% endschema %}

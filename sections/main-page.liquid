@@ -1,0 +1,30 @@
+<header class="page-hero">
+  <nav aria-label="{{ 'accessibility.breadcrumb' | t }}" class="breadcrumb">
+    <ol>
+      <li><a href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t }}</a></li>
+      <li aria-current="page">{{ page.title }}</li>
+    </ol>
+  </nav>
+  <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+  <h1>{{ page.title }}</h1>
+</header>
+
+<section class="section">
+  <div class="about-copy" style="max-width:720px">
+    {{ page.content }}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Página",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Boutique"
+    }
+  ]
+}
+{% endschema %}

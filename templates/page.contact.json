@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "contact-form",
+      "settings": {
+        "email": "ola@florenzaurban.com",
+        "instagram_label": "@florenzaurban"
+      }
+    }
+  },
+  "order": ["main"]
+}

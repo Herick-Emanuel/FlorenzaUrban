@@ -1,0 +1,60 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "brand_line": "Florenza",
+        "brand_em": "Urban",
+        "heading": "Glamour que habita a cidade.",
+        "text": "Boutique de peças selecionadas — cortes precisos, tecidos nobres e uma presença que não pede licença.",
+        "button_label": "Ver coleção",
+        "button_link": "shopify://collections/all",
+        "button_label_2": "A boutique",
+        "button_link_2": "shopify://pages/sobre"
+      }
+    },
+    "benefits": {
+      "type": "benefits",
+      "blocks": {
+        "b1": { "type": "item", "settings": { "text": "Frete grátis acima de R$299" } },
+        "b2": { "type": "item", "settings": { "text": "Trocas em até 30 dias" } },
+        "b3": { "type": "item", "settings": { "text": "Curadoria exclusiva" } }
+      },
+      "block_order": ["b1", "b2", "b3"]
+    },
+    "lookbook": {
+      "type": "lookbook",
+      "blocks": {
+        "l1": { "type": "look", "settings": { "title": "Noite urbana", "caption": "Editorial 01", "link": "shopify://collections/all" } },
+        "l2": { "type": "look", "settings": { "title": "Linho & luz", "caption": "Editorial 02", "link": "shopify://collections/all" } },
+        "l3": { "type": "look", "settings": { "title": "Champagne hour", "caption": "Editorial 03", "link": "shopify://collections/all" } }
+      },
+      "block_order": ["l1", "l2", "l3"]
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Seleção da boutique",
+        "heading": "Peças em",
+        "heading_em": "destaque",
+        "products_to_show": 8,
+        "button_label": "Ver tudo"
+      }
+    },
+    "editorial": {
+      "type": "editorial",
+      "settings": {
+        "eyebrow": "A boutique",
+        "heading": "Onde o estilo encontra a",
+        "heading_em": "cidade",
+        "button_label": "Nossa história",
+        "button_link": "shopify://pages/sobre"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {}
+    }
+  },
+  "order": ["hero", "benefits", "lookbook", "featured", "editorial", "newsletter"]
+}

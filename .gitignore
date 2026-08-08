@@ -1,0 +1,23 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Shopify CLI / local
+.shopify/
+.env
+.env.*
+
+# Node (se usar tooling local)
+node_modules/
+package-lock.json
+
+# Logs
+*.log
+npm-debug.log*

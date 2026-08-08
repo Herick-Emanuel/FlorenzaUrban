@@ -1,0 +1,14 @@
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "brand_text": "Florenza",
+        "description": "Boutique de moda contemporânea. Peças com presença, acabamento e intenção — para quem veste a cidade com glamour."
+      }
+    }
+  },
+  "order": ["footer"]
+}

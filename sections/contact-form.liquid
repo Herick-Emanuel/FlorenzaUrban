@@ -1,0 +1,86 @@
+<header class="page-hero">
+  <nav aria-label="{{ 'accessibility.breadcrumb' | t }}" class="breadcrumb">
+    <ol>
+      <li><a href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t }}</a></li>
+      <li aria-current="page">{{ page.title }}</li>
+    </ol>
+  </nav>
+  <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+  <h1>{{ page.title }}</h1>
+  {%- if section.settings.intro != blank -%}
+    <p>{{ section.settings.intro }}</p>
+  {%- endif -%}
+</header>
+
+<section class="section">
+  <div class="contact-grid">
+    <div>
+      <h2 class="section-title">{{ section.settings.heading }}{% if section.settings.heading_em != blank %} <em>{{ section.settings.heading_em }}</em>{% endif %}</h2>
+      <div class="contact-channels">
+        {%- if section.settings.whatsapp != blank -%}
+          <div class="channel">
+            <strong>WhatsApp</strong>
+            <a href="{{ section.settings.whatsapp }}" target="_blank" rel="noopener noreferrer">{{ section.settings.whatsapp_label }}</a>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.instagram != blank -%}
+          <div class="channel">
+            <strong>Instagram</strong>
+            <a href="{{ section.settings.instagram }}" target="_blank" rel="noopener noreferrer">{{ section.settings.instagram_label }}</a>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.email != blank -%}
+          <div class="channel">
+            <strong>E-mail</strong>
+            <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.address != blank -%}
+          <div class="channel">
+            <strong>{{ 'contact.form.address' | t }}</strong>
+            <p>{{ section.settings.address | newline_to_br }}</p>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {% form 'contact', id: 'ContactForm', class: 'contact-form' %}
+      {%- if form.posted_successfully? -%}
+        <p style="color:var(--champagne);margin-bottom:20px">{{ 'contact.form.post_success' | t }}</p>
+      {%- endif -%}
+      {%- if form.errors -%}
+        <p style="color:var(--blush);margin-bottom:20px">{{ form.errors | default_errors }}</p>
+      {%- endif -%}
+
+      <div class="form-row">
+        <label for="ContactName">{{ 'contact.form.name' | t }}</label>
+        <input id="ContactName" type="text" name="contact[name]" required autocomplete="name" value="{{ form.name }}">
+      </div>
+      <div class="form-row">
+        <label for="ContactEmail">{{ 'contact.form.email' | t }}</label>
+        <input id="ContactEmail" type="email" name="contact[email]" required autocomplete="email" value="{{ form.email }}">
+      </div>
+      <div class="form-row">
+        <label for="ContactBody">{{ 'contact.form.message' | t }}</label>
+        <textarea id="ContactBody" name="contact[body]" required>{{ form.body }}</textarea>
+      </div>
+      <button class="btn btn-primary" type="submit">{{ 'contact.form.send' | t }}</button>
+    {% endform %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contato",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Atendimento" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Fale com a boutique — tiramos dúvidas de tamanho, looks e pedidos." },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Estamos" },
+    { "type": "text", "id": "heading_em", "label": "Título itálico", "default": "por perto" },
+    { "type": "url", "id": "whatsapp", "label": "Link WhatsApp" },
+    { "type": "text", "id": "whatsapp_label", "label": "Texto WhatsApp", "default": "(11) 00000-0000" },
+    { "type": "url", "id": "instagram", "label": "Instagram" },
+    { "type": "text", "id": "instagram_label", "label": "Texto Instagram", "default": "@florenzaurban" },
+  ]
+}
+{% endschema %}

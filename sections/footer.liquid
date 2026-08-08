@@ -1,0 +1,97 @@
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div>
+      <p class="footer-brand">{{ section.settings.brand_text }}</p>
+      <p class="footer-desc">{{ section.settings.description }}</p>
+      <div class="footer-social">
+        {%- if section.settings.instagram != blank -%}
+          <a href="{{ section.settings.instagram }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">In</a>
+        {%- endif -%}
+        {%- if section.settings.pinterest != blank -%}
+          <a href="{{ section.settings.pinterest }}" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">Pi</a>
+        {%- endif -%}
+        <a href="{{ routes.root_url }}pages/contato" aria-label="{{ 'general.navigation.contact' | t }}">Ct</a>
+      </div>
+    </div>
+
+    {%- for block in section.blocks -%}
+      <div class="footer-col" {{ block.shopify_attributes }}>
+        <h3>{{ block.settings.heading }}</h3>
+        <ul>
+          {%- for link in block.settings.menu.links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  <div class="footer-bottom">
+    <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ 'general.footer.rights' | t }}</span>
+    <div class="pay-badges">
+      {%- for type in shop.enabled_payment_types -%}
+        <span class="pay-badge">{{ type | payment_type_svg_tag }}</span>
+      {%- else -%}
+        <span class="pay-badge">Pix</span>
+        <span class="pay-badge">Visa</span>
+        <span class="pay-badge">Master</span>
+      {%- endfor -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_text",
+      "label": "Marca",
+      "default": "Florenza"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Descrição",
+      "default": "Boutique de moda contemporânea. Peças com presença, acabamento e intenção."
+    },
+    {
+      "type": "url",
+      "id": "instagram",
+      "label": "Instagram"
+    },
+    {
+      "type": "url",
+      "id": "pinterest",
+      "label": "Pinterest"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Título",
+          "default": "Loja"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "menu", "settings": { "heading": "Loja" } },
+      { "type": "menu", "settings": { "heading": "Boutique" } },
+      { "type": "menu", "settings": { "heading": "Ajuda" } }
+    ]
+  }
+}
+{% endschema %}

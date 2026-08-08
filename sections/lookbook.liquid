@@ -1,0 +1,96 @@
+<section class="section" aria-labelledby="Lookbook-{{ section.id }}">
+  <div class="section-header">
+    <div>
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="section-title" id="Lookbook-{{ section.id }}">
+        {{ section.settings.heading }}
+        {%- if section.settings.heading_em != blank -%} <em>{{ section.settings.heading_em }}</em>{%- endif -%}
+      </h2>
+    </div>
+    {%- if section.settings.button_label != blank -%}
+      <a class="btn btn-ghost" href="{{ section.settings.button_link }}">{{ section.settings.button_label }}</a>
+    {%- endif -%}
+  </div>
+
+  <div class="lookbook">
+    {%- for block in section.blocks -%}
+      <a class="look" href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
+        {%- if block.settings.image != blank -%}
+          {{
+            block.settings.image
+            | image_url: width: 1200
+            | image_tag: loading: 'lazy', widths: '600, 900, 1200', sizes: '(min-width: 990px) 33vw, 100vw', alt: block.settings.title
+          }}
+        {%- else -%}
+          {{ 'collection-1' | placeholder_svg_tag }}
+        {%- endif -%}
+        <div class="look-caption">
+          <p>{{ block.settings.title }}</p>
+          <span>{{ block.settings.caption }}</span>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Lookbook",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Lookbook"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Atmosfera da"
+    },
+    {
+      "type": "text",
+      "id": "heading_em",
+      "label": "Título itálico",
+      "default": "temporada"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Botão",
+      "default": "Explorar"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link do botão",
+      "default": "/collections/all"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "look",
+      "name": "Look",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Imagem" },
+        { "type": "text", "id": "title", "label": "Título", "default": "Noite urbana" },
+        { "type": "text", "id": "caption", "label": "Legenda", "default": "Editorial 01" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lookbook",
+      "blocks": [
+        { "type": "look", "settings": { "title": "Noite urbana", "caption": "Editorial 01" } },
+        { "type": "look", "settings": { "title": "Linho & luz", "caption": "Editorial 02" } },
+        { "type": "look", "settings": { "title": "Champagne hour", "caption": "Editorial 03" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

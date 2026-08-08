@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-about",
+      "blocks": {
+        "v1": { "type": "value", "settings": { "title": "Curadoria", "text": "Cada peça passa por um olhar editorial antes de chegar à sacola — qualidade acima de volume." } },
+        "v2": { "type": "value", "settings": { "title": "Presença", "text": "Silhuetas que marcam sem exagero. Glamour urbano para quem entra em qualquer ambiente com naturalidade." } },
+        "v3": { "type": "value", "settings": { "title": "Cuidado", "text": "Atendimento de boutique: orientação de tamanho, looks e acompanhamento pós-compra." } }
+      },
+      "block_order": ["v1", "v2", "v3"],
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

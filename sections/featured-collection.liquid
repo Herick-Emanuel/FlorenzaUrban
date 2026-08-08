@@ -1,0 +1,88 @@
+{%- assign collection = collections[section.settings.collection] -%}
+
+<section class="section" style="padding-top:0" aria-labelledby="Featured-{{ section.id }}">
+  <div class="section-header">
+    <div>
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="section-title" id="Featured-{{ section.id }}">
+        {{ section.settings.heading }}
+        {%- if section.settings.heading_em != blank -%} <em>{{ section.settings.heading_em }}</em>{%- endif -%}
+      </h2>
+    </div>
+    {%- if section.settings.button_label != blank -%}
+      <a class="btn btn-ghost" href="{{ collection.url | default: routes.all_products_collection_url }}">
+        {{ section.settings.button_label }}
+      </a>
+    {%- endif -%}
+  </div>
+
+  <div class="products-grid">
+    {%- if collection != blank and collection.products.size > 0 -%}
+      {%- for product in collection.products limit: section.settings.products_to_show -%}
+        {% render 'product-card', product: product %}
+      {%- endfor -%}
+    {%- else -%}
+      {%- for i in (1..4) -%}
+        <div class="product-card">
+          <div class="product-media">{{ 'product-1' | placeholder_svg_tag }}</div>
+          <p class="product-brand">Florenza</p>
+          <h3 class="product-name">{{ 'onboarding.product_title' | t }}</h3>
+          <div class="product-price"><span class="price-current">R$ 0</span></div>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Coleção em destaque",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Seleção da boutique"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Peças em"
+    },
+    {
+      "type": "text",
+      "id": "heading_em",
+      "label": "Título itálico",
+      "default": "destaque"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Coleção"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 8,
+      "label": "Produtos"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Botão",
+      "default": "Ver tudo"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Coleção em destaque"
+    }
+  ]
+}
+{% endschema %}

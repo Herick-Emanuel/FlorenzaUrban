@@ -1,0 +1,51 @@
+<header class="site-nav{% unless template.name == 'index' %} is-scrolled{% endunless %}">
+  <a class="nav-brand" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
+    {{ settings.brand_name | default: shop.name }}
+    <span>{{ settings.brand_tagline | default: 'Urban' }}</span>
+  </a>
+
+  <nav aria-label="{{ 'accessibility.main_navigation' | t }}">
+    <ul class="nav-links">
+      {%- for link in section.settings.menu.links -%}
+        <li>
+          <a
+            href="{{ link.url }}"
+            {% if link.active %}aria-current="page" class="is-active"{% endif %}
+          >
+            {{ link.title }}
+          </a>
+        </li>
+      {%- else -%}
+        <li><a href="{{ routes.all_products_collection_url }}">{{ 'general.navigation.collection' | t }}</a></li>
+        <li><a href="/pages/sobre">{{ 'general.navigation.about' | t }}</a></li>
+        <li><a href="/pages/contato">{{ 'general.navigation.contact' | t }}</a></li>
+      {%- endfor -%}
+    </ul>
+  </nav>
+
+  <div class="nav-actions">
+    <a class="cart-btn" href="{{ routes.cart_url }}" aria-label="{{ 'general.cart.title' | t }}">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" x2="21" y1="6" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span>{{ 'general.cart.title' | t }}</span>
+      <span class="cart-count">{{ cart.item_count }}</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-label="{{ 'accessibility.menu' | t }}" aria-expanded="false">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

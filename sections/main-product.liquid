@@ -1,0 +1,103 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign featured = current_variant.featured_media | default: product.featured_media -%}
+
+<article class="product-detail">
+  <div class="product-gallery">
+    <div class="product-gallery-main">
+      {%- if featured != blank -%}
+        <img
+          id="mainProductImg"
+          src="{{ featured | image_url: width: 1200 }}"
+          alt="{{ featured.alt | default: product.title | escape }}"
+          width="{{ featured.width }}"
+          height="{{ featured.height }}"
+        >
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag }}
+      {%- endif -%}
+    </div>
+    {%- if product.media.size > 1 -%}
+      <div class="product-thumbs">
+        {%- for media in product.media limit: 4 -%}
+          <button
+            type="button"
+            class="{% if forloop.first %}is-active{% endif %}"
+            data-thumb
+            data-src="{{ media | image_url: width: 1200 }}"
+            aria-label="Imagem {{ forloop.index }}"
+          >
+            <img src="{{ media | image_url: width: 300 }}" alt="" width="300" height="225" loading="lazy">
+          </button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="product-info">
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+      <ol>
+        <li><a href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t }}</a></li>
+        <li><a href="{{ routes.all_products_collection_url }}">{{ 'general.breadcrumbs.collection' | t }}</a></li>
+        <li aria-current="page">{{ product.title }}</li>
+      </ol>
+    </nav>
+
+    <a class="back-link" href="{{ routes.all_products_collection_url }}">← {{ 'products.product.back_to_collection' | t }}</a>
+
+    {%- if product.vendor != blank -%}
+      <p class="product-brand" style="margin-top:28px">{{ product.vendor }}</p>
+    {%- endif -%}
+    <h1>{{ product.title }}</h1>
+
+    <div class="product-price">
+      <span class="price-current">{{ current_variant.price | money }}</span>
+      {%- if current_variant.compare_at_price > current_variant.price -%}
+        <span class="price-old">{{ current_variant.compare_at_price | money }}</span>
+      {%- endif -%}
+    </div>
+
+    {%- if product.description != blank -%}
+      <div class="product-desc rte">{{ product.description }}</div>
+    {%- endif -%}
+
+    {% form 'product', product, data-product-form: '', data-ajax-cart: '' %}
+      {%- unless product.has_only_default_variant -%}
+        <p class="size-label">{{ 'products.product.variant' | t }}</p>
+        <div class="form-row" style="margin-bottom:28px">
+          <select name="id" class="product-variant-select" style="background:transparent;border:1px solid var(--line);color:var(--ivory);padding:14px 16px;width:100%;font-family:inherit">
+            {%- for variant in product.variants -%}
+              <option
+                value="{{ variant.id }}"
+                {% if variant == current_variant %}selected="selected"{% endif %}
+                {% unless variant.available %}disabled{% endunless %}
+              >
+                {{ variant.title }} — {{ variant.price | money }}
+              </option>
+            {%- endfor -%}
+          </select>
+        </div>
+      {%- else -%}
+        <input type="hidden" name="id" value="{{ current_variant.id }}">
+      {%- endunless -%}
+
+      <div class="product-actions-row">
+        <button type="submit" class="btn btn-primary" name="add" {% unless current_variant.available %}disabled{% endunless %}>
+          {%- if current_variant.available -%}
+            {{ 'products.product.add_to_cart' | t }}
+          {%- else -%}
+            {{ 'products.product.sold_out' | t }}
+          {%- endif -%}
+        </button>
+        <a class="btn btn-ghost" href="/pages/contato">{{ 'products.product.contact_boutique' | t }}</a>
+      </div>
+    {% endform %}
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Produto",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

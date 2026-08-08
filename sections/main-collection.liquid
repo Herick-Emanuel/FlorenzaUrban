@@ -1,0 +1,84 @@
+<header class="page-hero">
+  <nav aria-label="{{ 'accessibility.breadcrumb' | t }}" class="breadcrumb">
+    <ol>
+      <li><a href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t }}</a></li>
+      <li aria-current="page">{{ collection.title }}</li>
+    </ol>
+  </nav>
+  <p class="eyebrow">{{ 'sections.collection.eyebrow' | t }}</p>
+  <h1>{{ collection.title }}</h1>
+  {%- if collection.description != blank -%}
+    <div>{{ collection.description }}</div>
+  {%- else -%}
+    <p>{{ section.settings.fallback_text }}</p>
+  {%- endif -%}
+</header>
+
+<section class="section">
+  {%- if section.settings.show_tag_filters and collection.all_tags.size > 0 -%}
+    <div class="filters" aria-label="{{ 'sections.collection.filter' | t }}">
+      <a class="filter-btn{% unless current_tags %} is-active{% endunless %}" href="{{ collection.url }}">
+        {{ 'sections.collection.all' | t }}
+      </a>
+      {%- for tag in collection.all_tags limit: 12 -%}
+        <a
+          class="filter-btn{% if current_tags contains tag %} is-active{% endif %}"
+          href="{{ collection.url }}/{{ tag | handle }}"
+        >
+          {{ tag }}
+        </a>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  <div class="products-grid">
+    {%- paginate collection.products by section.settings.products_per_page -%}
+      {%- for product in collection.products -%}
+        {% render 'product-card', product: product %}
+      {%- else -%}
+        <p style="color:var(--ivory-dim);grid-column:1/-1">{{ 'sections.collection.empty' | t }}</p>
+      {%- endfor -%}
+
+      {%- if paginate.pages > 1 -%}
+        <nav class="filters" style="grid-column:1/-1;margin-top:32px" aria-label="Pagination">
+          {%- if paginate.previous -%}
+            <a class="filter-btn" href="{{ paginate.previous.url }}">←</a>
+          {%- endif -%}
+          <span class="filter-btn is-active">{{ paginate.current_page }} / {{ paginate.pages }}</span>
+          {%- if paginate.next -%}
+            <a class="filter-btn" href="{{ paginate.next.url }}">→</a>
+          {%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Coleção",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "fallback_text",
+      "label": "Texto sem descrição",
+      "default": "Peças curadas com olhar editorial — do dia urbano à noite com champagne."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tag_filters",
+      "label": "Mostrar filtros por tag",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 36,
+      "step": 4,
+      "default": 16,
+      "label": "Produtos por página"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,108 @@
+<section class="hero" aria-label="{{ section.settings.heading | escape }}">
+  <div class="hero-media">
+    {%- if section.settings.image != blank -%}
+      {%- assign hero_alt = section.settings.image.alt | default: section.settings.heading -%}
+      {{
+        section.settings.image
+        | image_url: width: 2000
+        | image_tag:
+          loading: 'eager',
+          fetchpriority: 'high',
+          widths: '800, 1200, 1600, 2000',
+          sizes: '100vw',
+          alt: hero_alt
+      }}
+    {%- else -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag }}
+    {%- endif -%}
+  </div>
+  <div class="hero-content">
+    {%- if section.settings.brand_line != blank -%}
+      <h1 class="hero-brand">
+        {{ section.settings.brand_line }}
+        {%- if section.settings.brand_em != blank -%}<em>{{ section.settings.brand_em }}</em>{%- endif -%}
+      </h1>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <p class="hero-title">{{ section.settings.heading }}</p>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <p class="hero-desc">{{ section.settings.text }}</p>
+    {%- endif -%}
+    <div class="hero-ctas">
+      {%- if section.settings.button_label != blank -%}
+        <a class="btn btn-primary" href="{{ section.settings.button_link }}">{{ section.settings.button_label }}</a>
+      {%- endif -%}
+      {%- if section.settings.button_label_2 != blank -%}
+        <a class="btn btn-ghost" href="{{ section.settings.button_link_2 }}">{{ section.settings.button_label_2 }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero boutique",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagem de fundo"
+    },
+    {
+      "type": "text",
+      "id": "brand_line",
+      "label": "Marca (linha 1)",
+      "default": "Florenza"
+    },
+    {
+      "type": "text",
+      "id": "brand_em",
+      "label": "Marca (itálico)",
+      "default": "Urban"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Headline",
+      "default": "Glamour que habita a cidade."
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Texto",
+      "default": "Boutique de peças selecionadas — cortes precisos, tecidos nobres e uma presença que não pede licença."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Botão principal",
+      "default": "Ver coleção"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link do botão principal",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Botão secundário",
+      "default": "A boutique"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Link do botão secundário",
+      "default": "/pages/sobre"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero boutique"
+    }
+  ]
+}
+{% endschema %}
