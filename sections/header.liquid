@@ -36,8 +36,16 @@
         </li>
       {%- else -%}
         <li><a href="{{ routes.all_products_collection_url }}">{{ 'general.navigation.collection' | t }}</a></li>
-        <li><a href="/pages/sobre">{{ 'general.navigation.about' | t }}</a></li>
-        <li><a href="/pages/contato">{{ 'general.navigation.contact' | t }}</a></li>
+        {%- if pages.sobre.handle != blank -%}
+          <li><a href="{{ pages.sobre.url }}">{{ 'general.navigation.about' | t }}</a></li>
+        {%- elsif pages['about'].handle != blank -%}
+          <li><a href="{{ pages['about'].url }}">{{ 'general.navigation.about' | t }}</a></li>
+        {%- endif -%}
+        {%- if pages.contato.handle != blank -%}
+          <li><a href="{{ pages.contato.url }}">{{ 'general.navigation.contact' | t }}</a></li>
+        {%- elsif pages.contact.handle != blank -%}
+          <li><a href="{{ pages.contact.url }}">{{ 'general.navigation.contact' | t }}</a></li>
+        {%- endif -%}
       {%- endfor -%}
     </ul>
   </nav>

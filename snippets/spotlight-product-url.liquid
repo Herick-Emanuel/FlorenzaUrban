@@ -1,0 +1,63 @@
+{%- comment -%}
+  Resolve a product URL for CTAs:
+  1) First available product from a best-sellers collection (if it exists)
+  2) Else available product with the lowest tracked inventory
+  3) Else first available product from all
+  4) Else all-products collection URL
+{%- endcomment -%}
+{%- liquid
+  assign spotlight_url = routes.all_products_collection_url
+  assign spotlight_product = nil
+
+  assign bestseller_handles = 'mais-vendidos,best-sellers,bestsellers,best-selling,mais_vendidos' | split: ','
+  for handle in bestseller_handles
+    assign candidate_collection = collections[handle]
+    if candidate_collection != blank and candidate_collection.products_count > 0
+      for product in candidate_collection.products limit: 24
+        if product.available
+          assign spotlight_product = product
+          break
+        endif
+      endfor
+    endif
+    if spotlight_product != blank
+      break
+    endif
+  endfor
+
+  if spotlight_product == blank and collections.all != blank
+    assign lowest_qty = 999999999
+    assign lowest_stock_product = nil
+    assign first_available = nil
+
+    for product in collections.all.products limit: 50
+      unless product.available
+        continue
+      endunless
+
+      if first_available == blank
+        assign first_available = product
+      endif
+
+      assign variant = product.selected_or_first_available_variant
+      if variant.inventory_management != blank
+        assign qty = variant.inventory_quantity | default: 0
+        if qty >= 0 and qty < lowest_qty
+          assign lowest_qty = qty
+          assign lowest_stock_product = product
+        endif
+      endif
+    endfor
+
+    if lowest_stock_product != blank
+      assign spotlight_product = lowest_stock_product
+    elsif first_available != blank
+      assign spotlight_product = first_available
+    endif
+  endif
+
+  if spotlight_product != blank
+    assign spotlight_url = spotlight_product.url
+  endif
+-%}
+{{- spotlight_url -}}

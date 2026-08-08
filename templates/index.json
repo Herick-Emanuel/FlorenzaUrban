@@ -7,10 +7,8 @@
         "brand_em": "Urban",
         "heading": "Glamour que habita a cidade.",
         "text": "Boutique de peças selecionadas — cortes precisos, tecidos nobres e uma presença que não pede licença.",
-        "button_label": "Ver coleção",
-        "button_link": "shopify://collections/all",
-        "button_label_2": "A boutique",
-        "button_link_2": "shopify://pages/sobre"
+        "button_label": "Ver peça em destaque",
+        "button_label_2": "A boutique"
       }
     },
     "benefits": {
@@ -47,8 +45,7 @@
         "eyebrow": "A boutique",
         "heading": "Onde o estilo encontra a",
         "heading_em": "cidade",
-        "button_label": "Nossa história",
-        "button_link": "shopify://pages/sobre"
+        "button_label": "Nossa história"
       }
     },
     "newsletter": {

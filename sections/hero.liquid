@@ -1,3 +1,23 @@
+{%- liquid
+  if section.settings.featured_product != blank
+    assign primary_href = section.settings.featured_product.url
+  else
+    capture primary_href
+      render 'spotlight-product-url'
+    endcapture
+    assign primary_href = primary_href | strip
+  endif
+
+  if section.settings.button_link_2 != blank
+    assign secondary_href = section.settings.button_link_2
+  elsif pages.sobre.handle != blank
+    assign secondary_href = pages.sobre.url
+  elsif pages['about'].handle != blank
+    assign secondary_href = pages['about'].url
+  else
+    assign secondary_href = routes.root_url
+  endif
+-%}
 <section class="hero" aria-label="{{ section.settings.heading | escape }}">
   <div class="hero-media">
     {%- if section.settings.image != blank -%}
@@ -31,10 +51,10 @@
     {%- endif -%}
     <div class="hero-ctas">
       {%- if section.settings.button_label != blank -%}
-        <a class="btn btn-primary" href="{{ section.settings.button_link }}">{{ section.settings.button_label }}</a>
+        <a class="btn btn-primary" href="{{ primary_href }}">{{ section.settings.button_label }}</a>
       {%- endif -%}
       {%- if section.settings.button_label_2 != blank -%}
-        <a class="btn btn-ghost" href="{{ section.settings.button_link_2 }}">{{ section.settings.button_label_2 }}</a>
+        <a class="btn btn-ghost" href="{{ secondary_href }}">{{ section.settings.button_label_2 }}</a>
       {%- endif -%}
     </div>
   </div>
@@ -78,13 +98,13 @@
       "type": "text",
       "id": "button_label",
       "label": "Botão principal",
-      "default": "Ver coleção"
+      "default": "Ver peça em destaque"
     },
     {
-      "type": "url",
-      "id": "button_link",
-      "label": "Link do botão principal",
-      "default": "/collections/all"
+      "type": "product",
+      "id": "featured_product",
+      "label": "Produto do botão principal",
+      "info": "Se vazio, usa o mais vendido (coleção mais-vendidos) ou o de menor estoque."
     },
     {
       "type": "text",
@@ -96,7 +116,7 @@
       "type": "url",
       "id": "button_link_2",
       "label": "Link do botão secundário",
-      "default": "/pages/sobre"
+      "info": "Se vazio, tenta a página Sobre; se não existir, volta à home."
     }
   ],
   "presets": [
