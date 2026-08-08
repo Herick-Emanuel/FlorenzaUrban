@@ -24,8 +24,15 @@
       },
       {
         "type": "image_picker",
+        "id": "logo",
+        "label": "Logo do site",
+        "info": "Se vazio, usa FUBG.png dos assets do tema."
+      },
+      {
+        "type": "image_picker",
         "id": "favicon",
-        "label": "Favicon"
+        "label": "Favicon",
+        "info": "Se vazio, usa FU.ico dos assets do tema."
       },
       {
         "type": "image_picker",

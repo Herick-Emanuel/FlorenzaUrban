@@ -1,7 +1,26 @@
 <header class="site-nav{% unless template.name == 'index' %} is-scrolled{% endunless %}">
   <a class="nav-brand" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
-    {{ settings.brand_name | default: shop.name }}
-    <span>{{ settings.brand_tagline | default: 'Urban' }}</span>
+    {%- if settings.logo != blank -%}
+      {{
+        settings.logo
+        | image_url: width: 360
+        | image_tag:
+          class: 'nav-brand__logo',
+          widths: '180, 360',
+          sizes: '140px',
+          alt: shop.name,
+          loading: 'eager'
+      }}
+    {%- else -%}
+      <img
+        class="nav-brand__logo"
+        src="{{ 'FUBG.png' | asset_url }}"
+        alt="{{ shop.name }}"
+        width="140"
+        height="56"
+        loading="eager"
+      >
+    {%- endif -%}
   </a>
 
   <nav aria-label="{{ 'accessibility.main_navigation' | t }}">

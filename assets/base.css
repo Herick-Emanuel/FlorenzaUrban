@@ -105,20 +105,16 @@ ul { list-style: none; }
 }
 
 .nav-brand {
-  font-family: var(--font-display);
-  font-size: clamp(18px, 2vw, 22px);
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--ivory);
+  display: block;
+  line-height: 0;
 }
 
-.nav-brand span {
+.nav-brand__logo {
   display: block;
-  font-size: 0.55em;
-  letter-spacing: 0.42em;
-  color: var(--champagne);
-  margin-top: 2px;
+  height: 48px;
+  width: auto;
+  max-width: min(160px, 42vw);
+  object-fit: contain;
 }
 
 .nav-links {
@@ -685,11 +681,17 @@ ul { list-style: none; }
 }
 
 .footer-brand {
-  font-family: var(--font-display);
-  font-size: 28px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  display: inline-block;
+  line-height: 0;
   margin-bottom: 14px;
+}
+
+.footer-brand__logo {
+  display: block;
+  height: 64px;
+  width: auto;
+  max-width: min(200px, 70vw);
+  object-fit: contain;
 }
 
 .footer-desc {
