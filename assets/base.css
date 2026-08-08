@@ -481,6 +481,12 @@ ul { list-style: none; }
   gap: clamp(16px, 2vw, 28px);
 }
 
+.featured-empty {
+  grid-column: 1 / -1;
+  color: var(--ivory-dim);
+  font-size: 14px;
+}
+
 .product-card {
   display: block;
   color: inherit;
